@@ -1,6 +1,8 @@
 # Sobre a NLW-Devops
 
-Estruturação da automação de todo o processo de deploy da aplicação. Até agora, foram feitas as seguintes atividades:
+Apesar de já possuir alguns conhecimentos relacionados ao Linux, Docker, Docker Compose e Github Actions, senti que seria interessante revisar e entender melhor a relação deles com ferramentas mais robustas de infraestrutura. Por isso, ao ver esse evento da Rocketseat, resolvi dar uma pausa no meu programa de estudos tradicional para concluir o evento semanal e poder ver na prática o uso de ferramentas como Kubernetes e Terraform em conjunto com as anteriores.
+
+Nesse evento, o foco foi a estruturação da automação de todo o processo de deploy da aplicação. Até agora, foram feitas as seguintes atividades:
 
 - [x] Criação de um Dockerfile para preparar o container da aplicação
 - [x] Adaptação do banco de dados da aplicação original (com SQLite) para o Postgres
@@ -9,11 +11,16 @@ Estruturação da automação de todo o processo de deploy da aplicação. Até 
 - [ ] Uso do kubernetes para orquestração de containers em Prod
 - [ ] Uso do terraform para provisão da infra automatizada, ou seja, aplicação dos conceitos de IaC (Infrastructure as Code). 
 
+## Descoberta importante:
+
+Ao se renomear o diretório raiz de um projeto com docker-compose e persistência dos dados do Postgres em um volume docker, as migrations tendem a quebrar caso se rode o `--build` novamente, já com novo nome de diretório. Nesse caso, caso possa perder dados deste volume na máquina de desenvolvimento, é necessário remover o volume do docker com o comando `docker volume rm <nome-do-volume>`, antes de subir os containers com o comando `docker-compose up --build -d`. Ou remover todos os volumes, caso possa, com `docker volume rm $(docker volume ls -q)`.
+
+A descoberta foi de que a referência aos volumes do docker mantém uma relação com o nome da pasta raíz, para o estado do Postgres. Isso faz com que a reexecução das migrations do Prisma rodando por cima de um estado anterior, após renomear a pasta do projeto (nlw-devops), gerem o erro: `P3009` / `UTC Failed`, caso o volume tenha sido criado antes e já se tenha executado migrations após sua criação. 
+
 ---
 
-# Sobre a Aplicação Usada (já pronta para o curso):
-
-## pass.in
+## Sobre a Aplicação Usada (pass.in)
+_(já pronta para o evento)_
 
 O pass.in é uma aplicação de **gestão de participantes em eventos presenciais**. 
 
@@ -77,7 +84,7 @@ CREATE TABLE "attendees" (
 );
 
 CREATE TABLE "check_ins" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" serial NOT NULL PRIMARY KEY,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "attendeeId" TEXT NOT NULL,
     CONSTRAINT "check_ins_attendeeId_fkey" FOREIGN KEY ("attendeeId") REFERENCES "attendees" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
