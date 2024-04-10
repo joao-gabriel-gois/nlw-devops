@@ -26,4 +26,4 @@ A descoberta foi de que a referência aos volumes do docker mantém uma relaçã
 ---
 
 ## Aplicação usada
-Utilizamos uma aplicação node já pré-criada para o estudo das ferramentas de DevOps. Mudamos apenas alguns pontos no arquivo de migration para adaptar ao Postgres (doc atualizada de acordo) e scripts do package.json para garantir tanto que se execute as migrations antes de iniciar a aplicação. O README dessa aplicação pode ser encontrado **[aqui](docs/pass-in.README.md)**.
+Utilizamos uma aplicação node já pré-criada para o estudo das ferramentas de infraestrutura. Mudamos apenas alguns pontos no arquivo de migration para adaptar ao Postgres (doc atualizada de acordo) e scripts do package.json para garantir tanto que se execute as migrations antes de iniciar a aplicação. O README dessa aplicação pode ser encontrado **[aqui](nlw.service.passin/README.md)**.

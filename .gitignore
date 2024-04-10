@@ -1,4 +1,7 @@
-node_modules
+**/node_modules
+**/dist
 # Keep environment variables out of version control
-.env
-dist
+**/.env
+**/terraform.tfvars
+# Ideally, bellow file should be stored and updated remotely
+**/terraform.tfstate
