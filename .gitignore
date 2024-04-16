@@ -2,6 +2,8 @@
 **/dist
 # Keep environment variables out of version control
 **/.env
-**/terraform.tfvars
+**/*.tfvars
 # Ideally, bellow file should be stored and updated remotely
-**/terraform.tfstate
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform/*

@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'nlw.service.passin/**'
 
 jobs:
   build-and-push:
