@@ -1,9 +1,10 @@
 **/node_modules
 **/dist
-# Keep environment variables out of version control
+# Keep environment variables / secrets out of version control
 **/.env
 **/*.tfvars
-# Ideally, bellow file should be stored and updated remotely
+**/**/secret.yaml
+# Ideally, bellow files should be stored and updated remotely
 **/*.tfstate
 **/*.tfstate.*
 **/.terraform/*

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+
+metadata:
+  name: public-repo
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  
+stringData:
+  type: git
+  # In the case below we should be pointing directly to the app repository, a separeted one only for nlw.service.passin
+  url: git@github.com:joao-gabriel-gois/nlw-devops.git
+  # In case of private repos, we need to uncomment line bellow and add a private key
+  # sshPrivateKey: |
+    # Private Key here
