@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: pudou/nlw.service.passin
   pullPolicy: Always
-  tag: 344ff99
+  tag: 5e370e5
   port: 3333
   env:
     dbVar: DATABASE_URL
